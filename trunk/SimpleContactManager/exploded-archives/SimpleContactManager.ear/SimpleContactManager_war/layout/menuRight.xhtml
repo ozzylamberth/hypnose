@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+
+			<f:facet name="header">
+				<h:outputLabel value="#{messages.wallet}" />
+			</f:facet>
+			<h:graphicImage id="walletClosedImg" value="/img/closedWalletImg.png" rendered="#{not identity.loggedIn}"/>
+			<h:graphicImage id="walletOpenImg" value="/img/openWalletImg.png" rendered="#{identity.loggedIn}"/>
+</ui:composition>

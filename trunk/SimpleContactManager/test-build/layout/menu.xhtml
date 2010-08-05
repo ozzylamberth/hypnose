@@ -1,0 +1,51 @@
+<rich:toolBar itemSeparator="line" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich">
+	<rich:toolBarGroup>
+		<h:outputText value="Dohasur:" />
+		<s:link id="menuHomeId" view="/home.xhtml" value="#{messages.home}"
+			propagation="none" />
+	</rich:toolBarGroup>
+	
+	<rich:toolBarGroup>
+		<h:form>
+			<h:selectOneMenu value="#{localeSelector.localeString}">
+				<f:selectItems value="#{localeSelector.supportedLocales}" />
+			</h:selectOneMenu>
+			<h:commandButton action="#{localeSelector.select}"
+				value="#{messages.changeLanguage}" />
+		</h:form>
+	</rich:toolBarGroup>
+	
+	<rich:toolBarGroup>
+		<s:link id="menuHelpId" view="/help.xhtml" value="#{messages.help}"
+			propagation="none" />
+	</rich:toolBarGroup>
+	
+	<rich:toolBarGroup>
+		<s:link id="menuAboutUsId" view="/aboutus.xhtml" value="#{messages.aboutUs}"
+			propagation="none" />
+	</rich:toolBarGroup>
+
+
+	<!-- @newMenuItem@ -->
+	<rich:toolBarGroup location="right">
+		<h:form id="loginTopForm">
+			<h:outputLabel value="#{messages.username} " for="plUsername" />
+			<h:inputText id="plUsername" value="#{identity.username}" />
+			<h:outputLabel value="#{messages.password} " for="plPassword" />
+			<h:inputSecret id="plPassword" value="#{identity.password}" />
+			<h:commandButton value="#{messages.login}" action="#{identity.login}"
+				rendered="#{not identity.loggedIn}" />
+			<s:button value="#{messages.forgotPwdQuestion}"
+				view="/resetPassword.xhtml" rendered="#{not identity.loggedIn}"
+				propagation="none" />
+			<h:commandButton value="#{messages.logout}"
+				action="#{identity.logout}" rendered="#{identity.loggedIn}"
+				propagation="none" />
+		</h:form>
+	</rich:toolBarGroup>
+</rich:toolBar>
