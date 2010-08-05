@@ -1,0 +1,103 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+
+	<ui:define name="menuLeft">
+		<h3>Latap</h3>
+
+		<h:panelGrid columns="3" width="100%"
+			columnClasses="form-column, table-column">
+			<rich:panel>
+				<f:facet name="header">Insert new contact</f:facet>
+				<h:form id="fInsertContact">
+					<h:panelGrid columns="1">
+						<h:outputLabel for="name" value="Name" />
+						<h:inputText id="name" value="#{contactsManager.newContact.name}"
+							required="true">
+							<rich:beanValidator />
+							<a4j:support event="onkeyup" timeout="200" ajaxSingle="true"
+								reRender="insertButton" />
+						</h:inputText>
+						<rich:message for="name" style="color: red;" />
+						<h:outputLabel for="surname" value="Surname" />
+						<h:inputText id="surname"
+							value="#{contactsManager.newContact.surname}" required="true">
+							<rich:beanValidator />
+							<a4j:support event="onkeyup" timeout="200" ajaxSingle="true"
+								reRender="insertButton" />
+						</h:inputText>
+						<rich:message for="surname" style="color: red;" />
+						<h:outputLabel for="email" value="Email" />
+						<h:inputText id="email"
+							value="#{contactsManager.newContact.email}" required="true">
+							<rich:beanValidator />
+						</h:inputText>
+						<rich:message for="email" style="color: red;" />
+						<h:outputLabel for="birthdate" value="Birthdate" />
+						<rich:calendar id="birthdate"
+							value="#{contactsManager.newContact.birthdate}" required="true">
+							<rich:beanValidator />
+						</rich:calendar>
+						<rich:message for="birthdate" style="color: red;" />
+						<rich:spacer height="15" />
+						<rich:separator height="1" lineType="dotted" width="100%" />
+						<a4j:commandButton id="insertButton"
+							action="#{contactsManager.insertContact}"
+							value="Insert #{contactsManager.newContact.name} #{contactsManager.
+newContact.surname}"
+							reRender="fInsertContact, fContactsList" />
+					</h:panelGrid>
+				</h:form>
+			</rich:panel>
+			<rich:panel>
+				<h:form id="fContactsList">
+					<rich:dataTable id="edtContactsList"
+						value="#{contactsManager.contactsList}" var="contact" rows="5"
+						width="100%">
+						<f:facet name="header">Contact List</f:facet>
+						<rich:column sortBy="#{contact.name}" filterBy="#{contact.name}">
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{contact.name}" />
+						</rich:column>
+						<rich:column sortBy="#{contact.surname}"
+							filterBy="#{contact.surname}">
+							<f:facet name="header">Surname</f:facet>
+							<h:outputText value="#{contact.surname}" />
+						</rich:column>
+						<rich:column sortBy="#{contact.email}" filterBy="#{contact.email}">
+							<f:facet name="header">Email</f:facet>
+							<h:outputText value="#{contact.email}" />
+						</rich:column>
+						<rich:column align="center">
+							<f:facet name="header">Birthdate</f:facet>
+							<h:outputText value="#{contact.birthdate}">
+								<f:convertDateTime type="date" dateStyle="short" />
+							</h:outputText>
+						</rich:column>
+						<rich:column width="50" align="center">
+							<f:facet name="header">Delete</f:facet>
+							<a4j:commandLink reRender="fContactsList"
+								action="#{contactsManager.deleteContact}">
+								<h:graphicImage style="border-width: 0px;"
+									value="view/images/false.gif" />
+								<f:setPropertyActionListener value="#{contact}"
+									target="#{contactsManager.contactToDelete}" />
+							</a4j:commandLink>
+						</rich:column>
+					</rich:dataTable>
+					<h:outputText value="No contacts found"
+						rendered="#{empty contactsManager.contactsList}" />
+					<rich:datascroller id="dsContactsList" for="edtContactsList"
+						renderIfSinglePage="false" />
+				</h:form>
+			</rich:panel>
+		</h:panelGrid>
+
+	</ui:define>
+</ui:composition>

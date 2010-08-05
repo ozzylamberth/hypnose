@@ -1,0 +1,16 @@
+#Wed Aug 06 19:35:32 BST 2008
+action.package=book.richfaces.scm
+action.sources=/SimpleContactManager/src/hot
+eclipse.preferences.version=1
+model.package=book.richfaces.scm.model
+model.sources=/SimpleContactManager/src/main
+seam.ejb.project=SimpleContactManager
+seam.project.connection.profile=
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/SimpleContactManager/view
+seam.runtime.name=
+seam.test.creating=true
+seam.test.project=SimpleContactManager
+test.package=book.richfaces.scm.test
+test.sources=/SimpleContactManager/src/test

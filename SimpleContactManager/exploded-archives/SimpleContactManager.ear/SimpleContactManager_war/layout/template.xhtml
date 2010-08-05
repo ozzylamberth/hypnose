@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib" contentType="text/html">
+	<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>LATAP</title>
+	<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+	<a:loadStyle src="resource:///stylesheet/theme.xcss" />
+	<a:loadStyle src="/stylesheet/theme.css" />
+	<ui:insert name="head" />
+	</head>
+	<body>
+	<ui:include src="menu.xhtml">
+		<ui:param name="projectName" value="LATAP" />
+	</ui:include>
+
+	<h:graphicImage id="latapLogoImg" value="/img/latap_logo.jpg" />
+
+	<rich:separator height="1" lineType="solid" width="100%" />
+
+	<!--	<div class="body">-->
+
+	<!--	<h:messages id="messages" globalOnly="true"-->
+	<!--		styleClass="message" errorClass="errormsg" infoClass="infomsg"-->
+	<!--		warnClass="warnmsg" rendered="#{showGlobalMessages != 'false'}" /> -->
+
+
+
+	<h:panelGrid columns="3" width="100%"
+		columnClasses="menu-left, menu-middle, menu-right">
+		<rich:panel>
+		<f:facet name="header"><h:outputText value="#{messages.menuTitle}"/></f:facet>
+			<ui:include src="menuLeft.xhtml"/>
+
+
+		</rich:panel>
+		<rich:panel>
+			<ui:insert name="menuMiddle" />
+			mid
+		</rich:panel>
+		<rich:panel>
+			<ui:include src="menuRight.xhtml"/>
+		</rich:panel>
+		<ui:insert name="body" />
+	</h:panelGrid>
+
+
+	<!--	</div>-->
+
+	<div class="footer"></div>
+	</body>
+	</html>
+</f:view>
